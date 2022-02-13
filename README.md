@@ -1,1 +1,1 @@
-Hosted at [https://hash.biggergig.com](hash.biggergig.com)
+Hosted at [hash.biggergig.com](https://hash.biggergig.com)
