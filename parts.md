@@ -14,3 +14,8 @@ For the components, we are using the following:
  - [OLED Display](https://smile.amazon.com/gp/product/B08N4BZFF1/ref=ppx_yo_dt_b_asin_title_o02_s00?ie=UTF8&psc=1)
  - [LED Buttons](https://smile.amazon.com/gp/product/B01N11BDX9/ref=ppx_yo_dt_b_asin_title_o03_s00?ie=UTF8&psc=1)
  - [Bluetooth Module](https://smile.amazon.com/DSD-TECH-HC-05-Pass-through-Communication/dp/B01G9KSAF6/)
+
+For our serial interfaces we are using the following
+ - UART for interfacing with the Bluetooth Module
+ - I2C for interfacing with the OLED Display
+ 
