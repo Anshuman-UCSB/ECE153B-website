@@ -1,6 +1,9 @@
 ---
 layout: page
 title: Parts
+tagline: Peripherals and Serial Interface Protocols
+ref: parts
+order: 1
 permalink: /parts/
 ---
 
