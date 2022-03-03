@@ -22,18 +22,23 @@ Dialog DLL:      TCM.DLL V1.53.0.0
  
 <h2>Project:</h2>
 C:\Users\Reile\Documents\ECE 153B\Project\ECE153B-website\keil\project.uvprojx
-Project File Date:  02/23/2022
+Project File Date:  03/02/2022
 
 <h2>Output:</h2>
 *** Using Compiler 'V5.06 update 7 (build 960)', folder: 'C:\Keil_v5\ARM\ARMCC\Bin'
 Rebuild target 'Target 1'
 assembling startup_stm32l476xx.s...
+compiling SysClock.c...
+compiling EXTI.c...
 compiling main.c...
+main.c(19): warning:  #111-D: statement is unreachable
+  	return 0;
+main.c: 1 warning, 0 errors
 compiling LED.c...
 linking...
-Program Size: Code=728 RO-data=408 RW-data=0 ZI-data=1632  
+Program Size: Code=1236 RO-data=408 RW-data=0 ZI-data=1632  
 FromELF: creating hex file...
-".\Objects\project.axf" - 0 Error(s), 0 Warning(s).
+".\Objects\project.axf" - 0 Error(s), 1 Warning(s).
 
 <h2>Software Packages used:</h2>
 

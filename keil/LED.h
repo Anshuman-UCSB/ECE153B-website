@@ -5,6 +5,8 @@
 
 void LED_Init(void);
 
+void Green_LED_Toggle(void);
+
 void LED0_Off(void);
 void LED0_On(void);
 void LED0_Toggle(void);

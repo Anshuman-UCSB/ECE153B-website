@@ -2,7 +2,14 @@
 
 void LED_Init(void) {
 	// Enable GPIO Clocks
+	RCC->AHB2ENR |= RCC_AHB2ENR_GPIOAEN;
 	RCC->AHB2ENR |= RCC_AHB2ENR_GPIOCEN; // Enable GPIOC clock
+
+	// Greed LED
+	GPIOA->MODER &= ~GPIO_MODER_MODE5_1; // Set pin to output
+	GPIOA->MODER |= GPIO_MODER_MODE5_0;
+	GPIOA->OTYPER &= ~GPIO_OTYPER_OT5; // Set pin to push pull
+	GPIOA->PUPDR &= ~GPIO_PUPDR_PUPD5; // Set pin to no PUPD
 
 	// Initialize LED0
 	GPIOC->MODER &= ~GPIO_MODER_MODE0_1; // Set pin to output
@@ -27,6 +34,10 @@ void LED_Init(void) {
 	GPIOC->MODER |= GPIO_MODER_MODE3_0;
 	GPIOC->OTYPER &= ~GPIO_OTYPER_OT3; // Set pin to push pull
 	GPIOC->PUPDR &= ~GPIO_PUPDR_PUPD3; // Set pin to no PUPD
+}
+
+void Green_LED_Toggle(void) {
+	GPIOA->ODR ^= GPIO_ODR_OD5;
 }
 
 void LED0_Off(void) {
