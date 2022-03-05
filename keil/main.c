@@ -12,8 +12,6 @@ int main(void){
 	LED_Init();
 	EXTI_Init();
 
-	Green_LED_Toggle();
-	LED0_On();
 	while(1);
 
 	return 0;
