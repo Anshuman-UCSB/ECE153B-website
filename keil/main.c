@@ -2,106 +2,78 @@
 
 #include "EXTI.h"
 #include "LED.h"
+#include "BUTTON.h"
 #include "SysClock.h"
+#include "SysTimer.h"
+#include "queue.h"
+#include "RNG.h"
 
 #include <string.h>
 #include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+int PATTERN_SIZE = 2;
+int BUTTONS = 2;
 
 int main(void){
 	System_Clock_Init();
+	SysTick_Init();
 	LED_Init();
-	EXTI_Init();
+	BUTTON_Init();
+	RNG_Init();
 
-	while(1);
+	// srand("SOME RANDOM NUMBER"); // TODO: REILEY
 
-	return 0;
+	int i, j;
+	int button;
+	struct Queue* q = createQueue();
+	while(1){
+		// PATTERN STATE
+		clear(q);
+		for(i = 0;i<PATTERN_SIZE;i++){
+			button = rand()%BUTTONS;
+			push(q, button);
+			LED_On(button);
+			delay(1000);
+			LED_Off(button);
+			delay(100);
+		}
+		
+		// PLAY STATE
+		while(1){
+			for(i = 0;i<BUTTONS;i++){
+				if(isPressed(i)){
+					LED_On(i);
+					if(i != pop(q))
+						goto incorrect;
+					while(isPressed(i)); // wait till released
+					LED_Off(i);
+					if(isEmpty(q))
+						goto win;
+				}
+			}
+			delay(1);
+		}
+		
+		// WIN STATE
+		win:
+		delay(500);
+		for(i=0;i<4;i++){
+			for(j=0;j<4;j++)
+				LED_Toggle(j);
+			delay(300);
+		}
+		delay(1000);
+		continue;
+
+		// LOSE STATE
+		incorrect:
+		delay(500);
+		for(i = 0;i<4;i++)
+			LED_On(i);
+		delay(3000);
+		for(i = 0;i<4;i++)
+			LED_Off(i);
+	}
 }
-
-// int main(void) {	
-// 	LED_Init();
-// 	// Set mode of PA5 to output
-//     GPIOA->MODER &= ~GPIO_MODER_MODE3_1; 
-//     GPIOA->MODER |=  GPIO_MODER_MODE3_0;
-//     // Set output type of PA5 to push - pull
-//     GPIOA->OTYPER &= ~GPIO_OTYPER_OT3;
-//     //Set PA5 to No PUPD
-//     GPIOA->PUPDR &= ~GPIO_PUPDR_PUPD3;
-
-	
-// 	RCC->AHB2ENR |= RCC_AHB2ENR_GPIOCEN;
-// 	GPIOC->MODER &= ~GPIO_MODER_MODE8;
-// 	GPIOC->PUPDR &= ~GPIO_PUPDR_PUPD8;
-// 	GPIOC->MODER &= ~GPIO_MODER_MODE13;
-// 	GPIOC->PUPDR &= ~GPIO_PUPDR_PUPD13;
-        
-
-// 	int counter = 0;
-// 	while(1) {
-// 		counter+=1;
-//         LED0_Toggle();
-// 		if (counter % 2 == 1)
-// 			LED1_Toggle();
-
-//         for(volatile int i = 0; i < 500000; i++);
-// 	}
-
-// 	return 0;
-// }
-
-// void Init(){
-//     // Enable HSI
-//     RCC->CR |= ((uint32_t)RCC_CR_HSION);
-//     while ( (RCC->CR & (uint32_t) RCC_CR_HSIRDY) == 0 );
-
-//     // Select HSI as system clock source
-//     RCC->CFGR &= (uint32_t)((uint32_t)~(RCC_CFGR_SW));
-//     RCC->CFGR |= (uint32_t)RCC_CFGR_SW_HSI;
-//     while ((RCC->CFGR & (uint32_t)RCC_CFGR_SWS) == 0 );
-
-//     // Enable GPIO Clock
-//     RCC->AHB2ENR |= RCC_AHB2ENR_GPIOAEN;    // Enable clock for GPIO A
-//     RCC->AHB2ENR |= RCC_AHB2ENR_GPIOCEN;    // Enable clock for GPIO C
-    
-// 	// Initialize Green LED
-//     // Set mode of PA5 to output
-//     GPIOA->MODER &= ~GPIO_MODER_MODE5_1; 
-//     GPIOA->MODER |=  GPIO_MODER_MODE5_0;
-
-//     // Set output type of PA5 to push - pull
-//     GPIOA->OTYPER &= ~GPIO_OTYPER_OT5;
-//     //Set PA5 to No PUPD
-//     GPIOA->PUPDR &= ~GPIO_PUPDR_PUPD5;
-
-//     // Initialize User Button
-//     // Set mode of PC13 to input
-//     GPIOC->MODER &= ~GPIO_MODER_MODE13;
-
-//     // Set PC13 to No PUPD
-//     GPIOC->PUPDR &= ~GPIO_PUPDR_PUPD13;
-// }
-
-
-// void delay(int ticks){
-//     #define TICK_CYCLE_COUNT 1000ULL
-//     for(volatile unsigned long long i = 0;i<ticks*TICK_CYCLE_COUNT;i++);
-// }
-
-
-// int main(void){
-//     // Initialization
-//     Init();
-
-//     // Polling to Check for User Button Presses
-//     char pressed = 0, state = 0, prevPressed = 0, tick = 0;
-
-//     for(;;delay(1)){                                    // infinite loop, delay by one tick each iteration
-//         prevPressed = pressed;                          // set prevPressed to last button input before updating
-//         pressed = (GPIOC->IDR & GPIO_IDR_ID13) == 0;    // update button press to masked PC13 for button
-//         if(state)                                       // If we are in the odd state:
-//             GPIOA->ODR ^= (++tick % 100 == 0)<<5;       //     toggle the led status if tick is a multiple of 100
-//         else                                            // If in even state:
-//             GPIOA->ODR |= 1<<5;                         //     turn LED on
-//         state^=(!prevPressed && pressed);               // If the button is on the posedge of press, toggle state
-// 	}
-//     return 0;
-// }

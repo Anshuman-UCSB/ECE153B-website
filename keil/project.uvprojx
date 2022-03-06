@@ -428,6 +428,46 @@
               <FileType>5</FileType>
               <FilePath>.\SysClock.h</FilePath>
             </File>
+            <File>
+              <FileName>BUTTON.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\BUTTON.c</FilePath>
+            </File>
+            <File>
+              <FileName>BUTTON.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\BUTTON.h</FilePath>
+            </File>
+            <File>
+              <FileName>SysTimer.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\SysTimer.c</FilePath>
+            </File>
+            <File>
+              <FileName>SysTimer.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\SysTimer.h</FilePath>
+            </File>
+            <File>
+              <FileName>queue.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\queue.c</FilePath>
+            </File>
+            <File>
+              <FileName>queue.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\queue.h</FilePath>
+            </File>
+            <File>
+              <FileName>RNG.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\RNG.c</FilePath>
+            </File>
+            <File>
+              <FileName>RNG.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\RNG.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

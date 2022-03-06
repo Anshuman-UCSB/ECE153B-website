@@ -1,6 +1,22 @@
 #include "SysClock.h"
 
 void System_Clock_Init(void) {
+	// Select MSI as system clock source
+	RCC->CFGR &= ~RCC_CFGR_SW;		// set System clock source to MSI
+
+	// Set MSI clock range
+	RCC->CR &= ~RCC_CR_MSIRANGE;
+	RCC->CR |= RCC_CR_MSIRANGE_7; 	// Set MSI to 8MHz
+
+	// Use the MSI clock range that is defined in RCC_CR
+	RCC->CR |= RCC_CR_MSIRGSEL; // Use bits in RCC_CR MSIRANGE
+
+	// Enable MSI oscillator
+	RCC->CR |= RCC_CR_MSION; // Turn on MSI
+
+	// Wait until MSI is ready
+	while((RCC->CR & RCC_CR_MSIRDY) == 0);
+
 	// Enable HSI
 	RCC->CR |= RCC_CR_HSION;
 	while((RCC->CR & RCC_CR_HSIRDY) == 0);
