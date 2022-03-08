@@ -70,10 +70,19 @@ void LED_Toggle(int led){
 		case 3:	LED3_Toggle();	break;
 	}
 }
+int LED_State(int led){
+	switch(led){
+		case 0:	return LED0_State();
+		case 1:	return LED1_State();
+		case 2:	return LED2_State();
+		case 3:	return LED3_State();
+	}
+}
 
 void LED0_Off(void)  		{	GPIOC->ODR &= ~GPIO_ODR_OD0;}
 void LED0_On(void)  		{	GPIOC->ODR |= GPIO_ODR_OD0;}
 void LED0_Toggle(void)  	{	GPIOC->ODR ^= GPIO_ODR_OD0;}
+int LED0_State(void)  		{	return GPIOC->ODR & GPIO_ODR_OD0;}
 void LED0_Set(int val){
 	if(val)
 		LED0_On();
@@ -84,6 +93,7 @@ void LED0_Set(int val){
 void LED1_Off(void)  		{	GPIOC->ODR &= ~GPIO_ODR_OD1;}
 void LED1_On(void)  		{	GPIOC->ODR |= GPIO_ODR_OD1;}
 void LED1_Toggle(void)  	{	GPIOC->ODR ^= GPIO_ODR_OD1;}
+int LED1_State(void)  		{	return GPIOC->ODR & GPIO_ODR_OD1;}
 void LED1_Set(int val){
 	if(val)
 		LED1_On();
@@ -94,6 +104,7 @@ void LED1_Set(int val){
 void LED2_Off(void)  		{	GPIOC->ODR &= ~GPIO_ODR_OD2;}
 void LED2_On(void)  		{	GPIOC->ODR |= GPIO_ODR_OD2;}
 void LED2_Toggle(void)  	{	GPIOC->ODR ^= GPIO_ODR_OD2;}
+int LED2_State(void)  		{	return GPIOC->ODR & GPIO_ODR_OD2;}
 void LED2_Set(int val){
 	if(val)
 		LED2_On();
@@ -104,6 +115,7 @@ void LED2_Set(int val){
 void LED3_Off(void)  		{	GPIOC->ODR &= ~GPIO_ODR_OD3;}
 void LED3_On(void)  		{	GPIOC->ODR |= GPIO_ODR_OD3;}
 void LED3_Toggle(void)  	{	GPIOC->ODR ^= GPIO_ODR_OD3;}
+int LED3_State(void)  		{	return GPIOC->ODR & GPIO_ODR_OD2;}
 void LED3_Set(int val){
 	if(val)
 		LED3_On();

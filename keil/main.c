@@ -13,67 +13,70 @@
 #include <stdlib.h>
 #include <time.h>
 
-int PATTERN_SIZE = 2;
+extern uint32_t volatile msTicks;
+
+int CHOOSE = 1;
 int BUTTONS = 2;
+uint32_t DURATION = 3000;
 
 int main(void){
 	System_Clock_Init();
 	SysTick_Init();
 	LED_Init();
 	BUTTON_Init();
-	RNG_Init();
+	// RNG_Init();
 
 	// srand("SOME RANDOM NUMBER"); // TODO: REILEY
 
-	int i, j;
-	int button;
-	struct Queue* q = createQueue();
+	uint32_t start;
+	int i,j, count;
 	while(1){
-		// PATTERN STATE
-		clear(q);
-		for(i = 0;i<PATTERN_SIZE;i++){
-			button = rand()%BUTTONS;
-			push(q, button);
-			LED_On(button);
-			delay(1000);
-			LED_Off(button);
-			delay(100);
-		}
-		
-		// PLAY STATE
-		while(1){
-			for(i = 0;i<BUTTONS;i++){
-				if(isPressed(i)){
-					LED_On(i);
-					if(i != pop(q))
-						goto incorrect;
-					while(isPressed(i)); // wait till released
-					LED_Off(i);
-					if(isEmpty(q))
-						goto win;
-				}
+
+		// SETUP
+		for(i = 0;i<BUTTONS;i++) LED_Off(i);
+		delay(500);
+		count = CHOOSE;
+		while(count){
+			i = rand()%BUTTONS;
+			if(LED_State(i) == 0){
+				count--;
+				LED_On(i);
 			}
-			delay(1);
 		}
-		
+		// By here, <count> led's have been turned on
+		start = msTicks;
+		while(msTicks-start < DURATION){
+			for(i = 0;i<BUTTONS;i++){
+				if(isPressed(i)) LED_Off(i);
+			}
+			count = 0;
+			for(i = 0;i<BUTTONS;i++)
+				count|=LED_State(i);
+			if(count == 0)
+				goto win;
+		}
+		goto incorrect;
+
 		// WIN STATE
 		win:
-		delay(500);
+		for(i = 0;i<BUTTONS;i++) LED_Off(i);
+		delay(100);
 		for(i=0;i<4;i++){
-			for(j=0;j<4;j++)
+			for(j=0;j<BUTTONS;j++)
 				LED_Toggle(j);
-			delay(300);
+			delay(150);
 		}
 		delay(1000);
 		continue;
 
 		// LOSE STATE
 		incorrect:
+		for(i = 0;i<BUTTONS;i++) LED_Off(i);
 		delay(500);
-		for(i = 0;i<4;i++)
+		for(i = 0;i<BUTTONS;i++)
 			LED_On(i);
-		delay(3000);
-		for(i = 0;i<4;i++)
+		delay(1500);
+		for(i = 0;i<BUTTONS;i++)
 			LED_Off(i);
 	}
 }
