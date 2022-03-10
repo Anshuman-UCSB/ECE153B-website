@@ -2,7 +2,6 @@
 ".\objects\led.o"
 ".\objects\main.o"
 ".\objects\startup_stm32l476xx.o"
-".\objects\exti.o"
 ".\objects\sysclock.o"
 ".\objects\button.o"
 ".\objects\systimer.o"

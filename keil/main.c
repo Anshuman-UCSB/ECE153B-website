@@ -139,84 +139,74 @@ int main(void){
 	SysTick_Init();
 	LED_Init();
 	BUTTON_Init();
-	Init_USARTx(1);
+	//Init_USARTx(1);
 	initializeDisplay();
 	RNG_Init();
 
-	uint32_t start;
-	int i,j, count;
-	char rxByte;
-	uint8_t data = 0xAA;
-	for(i = 0;i<12;i++){
-		SPI_Transfer_Byte(SPI2, data, 1);
-		delay(100);
-	}
+	// uint32_t start;
+	// int i,j, count;
+	// char rxByte;
+	// uint8_t data = 0xAA;
+	// for(i = 0;i<12;i++){
+	// 	SPI_Transfer_Byte(SPI2, data, 1);
+	// 	delay(100);
+	// }
 	
 
-	gameStartup();
+	//gameStartup();
 
 
 	while(1){
 
-		scanf("%c", &rxByte);
-		printf("Recieved %c", &rxByte);
-		if(rxByte == 'y' || rxByte == 'Y'){
-			printf("The green LED has been turned on\n");
-			Green_LED_Toggle();
-		}else if(rxByte == 'n' || rxByte == 'N'){
-			printf("The green LED has been turned off\n");
-			Green_LED_Toggle();
-		}else{
-			printf("Unrecognized command, please enter a valid command.\n");
-		}
-		// I2C_SendData(I2C1, SlaveAddress, &Data_Send, 1);
-
-
-		// SETUP
-		for(i = 0;i<BUTTONS;i++) LED_Off(i);
-		delay(ROUND_STARTUP);
-		count = CHOOSE;
-		while(count){
-			i = rand()%BUTTONS;
-			if(LED_State(i) == 0){
-				count--;
-				LED_On(i);
-			}
-		}
-		// By here, <count> led's have been turned on
-		start = msTicks;
-		while(msTicks-start < DURATION){
-			for(i = 0;i<BUTTONS;i++){
-				if(isPressed(i)) LED_Off(i);
-			}
-			count = 0;
-			for(i = 0;i<BUTTONS;i++)
-				count|=LED_State(i);
-			if(count == 0)
-				goto win;
-		}
-		goto incorrect;
-
-		// WIN STATE
-		win:
-		for(i = 0;i<BUTTONS;i++) LED_Off(i);
-		delay(100);
-		for(i=0;i<4;i++){
-			for(j=0;j<BUTTONS;j++)
-				LED_Toggle(j);
-			delay(150);
-		}
+		Green_LED_Toggle();
 		delay(1000);
-		continue;
 
-		// LOSE STATE
-		incorrect:
-		for(i = 0;i<BUTTONS;i++) LED_Off(i);
-		delay(500);
-		for(i = 0;i<BUTTONS;i++)
-			LED_On(i);
-		delay(LOSE_PENALTY);
-		for(i = 0;i<BUTTONS;i++)
-			LED_Off(i);
+
+		// // SETUP
+		// for(i = 0;i<BUTTONS;i++) LED_Off(i);
+		// delay(ROUND_STARTUP);
+		// count = CHOOSE;
+		// while(count){
+		// 	i = rand()%BUTTONS;
+		// 	if(LED_State(i) == 0){
+		// 		count--;
+		// 		LED_On(i);
+		// 	}
+		// }
+		// // By here, <count> led's have been turned on
+		// start = msTicks;
+		// while(msTicks-start < DURATION){
+		// 	for(i = 0;i<BUTTONS;i++){
+		// 		if(isPressed(i)) LED_Off(i);
+		// 	}
+		// 	count = 0;
+		// 	for(i = 0;i<BUTTONS;i++)
+		// 		count|=LED_State(i);
+		// 	if(count == 0)
+		// 		goto win;
+		// }
+		// goto incorrect;
+
+		// // WIN STATE
+		// win:
+		// for(i = 0;i<BUTTONS;i++) LED_Off(i);
+		// delay(100);
+		// for(i=0;i<4;i++){
+		// 	for(j=0;j<BUTTONS;j++)
+		// 		LED_Toggle(j);
+		// 	delay(150);
+		// }
+		// delay(1000);
+		// continue;
+
+		// // LOSE STATE
+		// incorrect:
+		// for(i = 0;i<BUTTONS;i++) LED_Off(i);
+		// delay(500);
+		// for(i = 0;i<BUTTONS;i++)
+		// 	LED_On(i);
+		// delay(LOSE_PENALTY);
+		// for(i = 0;i<BUTTONS;i++)
+		// 	LED_Off(i);
 	}
 }
