@@ -18,7 +18,7 @@ board display will track his progress, including how many times he is successful
 pattern. The game can be enabled or disabled remotely through a Bluetooth module.
 
 # Block Diagram
-![Block diagram](/assets/diagram.png)
+![Block diagram](/assets/spi.png)
 
 # Demo Video
 TBD
