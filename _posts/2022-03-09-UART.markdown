@@ -1,0 +1,14 @@
+---
+layout: post
+title:  "UART protocol working"
+date:   2022-03-09 09:55:40 +0000
+categories: updates
+---
+
+Bluetooth UART protocol working
+
+This week we have successfully connected the bluetooth module to our board using UART so we can now control the game modes and input commands from our phone. 
+
+We have also implemented the RNG peripheral so the game will always display the lights in a random order.
+
+We also started working on the OLED display. We are able to send command registers but are having issues with sending data registers.
