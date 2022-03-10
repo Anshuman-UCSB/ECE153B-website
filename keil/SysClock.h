@@ -4,5 +4,6 @@
 #include "stm32l476xx.h"
 
 void System_Clock_Init(void);
+void UART_Clock(void);
 
 #endif

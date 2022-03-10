@@ -1,6 +1,6 @@
 #include "stm32l476xx.h"
 
-#include "EXTI.h"
+// #include "EXTI.h"
 #include "LED.h"
 #include "BUTTON.h"
 #include "SysClock.h"
@@ -44,86 +44,90 @@ void gameStartup(void){
 	char ans = ' ';
 	// On startup set parameters
 	printf("Set game parameters\n");
-	printf("Enter \'H\' for high, \'M\' for medium and \'L\' for low\n\n");
+	printf("Enter 'L' for low, 'M' for medium and 'H' for high\n\n");
 
 	// Choose: Number of buttons per round that are lit
-	printf("Set the number of buttuns per round that are lit up: ");
+	printf("Set the number of buttuns per round that are lit up (1/2/4): ");
 	scanf("%c", &ans);
-	if(ans == 'h' || ans == 'H'){
-		CHOOSE = 4;
-		printf("\nNumber of buttons was set to High\n");
-	}
-	else if(ans == 'm' || ans == 'M'){
-		CHOOSE = 3;
-		printf("\nNumber of buttons was set to Medium\n");
-	}
-	else if(ans == 'l' || ans == 'L'){
-		CHOOSE = 1;
-		printf("\nNumber of buttons was set to Low\n");
-	}
-	else{
-		printf("\nInvalid input using default\n");
-		CHOOSE = 1;
+	switch(ans){
+		case 'h': case 'H':
+			CHOOSE = 4;
+			printf("\nNumber of buttons was set to 4\n");
+			break;
+		case 'm': case 'M':
+			CHOOSE = 2;
+			printf("\nNumber of buttons was set to 2\n");
+			break;
+		case 'l': case 'L':
+			CHOOSE = 1;
+			printf("\nNumber of buttons was set to 1\n");
+			break;
+		default:
+			CHOOSE = 1;
+			printf("\nInvalid input using 1\n");
 	}
 
 	// Loose Penalty: How much time lights stay on for after a loss
-	printf("\nSet how long lights stay on after a loss: ");
+	printf("\nSet how long lights stay on after a loss (.5s/1.5s/3s): ");
 	scanf("%c", &ans);
-	if(ans == 'h' || ans == 'H'){
-		LOSE_PENALTY = 3000;
-		printf("\nLose Penalty was set to High\n");
-	}
-	else if(ans == 'm' || ans == 'M'){
-		LOSE_PENALTY = 1500;
-		printf("\nLose Penalty was set to Medium\n");
-	}
-	else if(ans == 'l' || ans == 'L'){
-		LOSE_PENALTY = 500;
-		printf("\nLose Penalty was set to Low\n");
-	}
-	else{
-		printf("\nInvalid input using default\n");
-		LOSE_PENALTY = 1500;
+	switch(ans){
+		case 'h': case 'H':
+			LOSE_PENALTY = 3000;
+			printf("\nLose Penalty was set to 3.0s\n");
+			break;
+		case 'm': case 'M':
+			LOSE_PENALTY = 1500;
+			printf("\nLose Penalty was set to 1.5s\n");
+			break;
+		case 'l': case 'L':
+			LOSE_PENALTY = 500;
+			printf("\nLose Penalty was set to .5s\n");
+			break;
+		default:
+			LOSE_PENALTY = 1500;
+			printf("\nInvalid input using 1.5s\n");
 	}
 
 	// Round Startup: Delay at beinning of round for lighting up buttons
-	printf("\nSet time delay at the beginning of each round for lighting up buttons: ");
+	printf("\nSet time delay at the beginning of each round for lighting up buttons (.1s/.5s/1.5s): ");
 	scanf("%c", &ans);
-	if(ans == 'h' || ans == 'H'){
-		ROUND_STARTUP = 1500;
-		printf("\nRound Startup was set to High\n");
-	}
-	else if(ans == 'm' || ans == 'M'){
-		ROUND_STARTUP = 500;
-		printf("\nRound Startup was set to Medium\n");
-	}
-	else if(ans == 'l' || ans == 'L'){
-		ROUND_STARTUP = 100;
-		printf("\nRound Startup was set to Low\n");
-	}
-	else{
-		printf("\nInvalid input using default\n");
-		ROUND_STARTUP = 500;
+	switch(ans){
+		case 'h': case 'H':
+			ROUND_STARTUP = 1500;
+			printf("\nRound Startup was set to 1.5s\n");
+			break;
+		case 'm': case 'M':
+			ROUND_STARTUP = 500;
+			printf("\nRound Startup was set to .5s\n");
+			break;
+		case 'l': case 'L':
+			ROUND_STARTUP = 100;
+			printf("\nRound Startup was set to .1s\n");
+			break;
+		default:
+			ROUND_STARTUP = 500;
+			printf("\nInvalid input using .5s\n");
 	}
 	
 	// Duration: How long you have to press all the buttons
-	printf("\nSet how long you have to press all the buttons before you loose the round: ");
+	printf("\nSet how long you have to press all the buttons before you lose the round (1s/3s/5s): ");
 	scanf("%c", &ans);
-	if(ans == 'h' || ans == 'H'){
-		DURATION = 5000;
-		printf("\nDuration was set to High\n");
-	}
-	else if(ans == 'm' || ans == 'M'){
-		DURATION = 3000;
-		printf("\nDuration was set to Medium\n");
-	}
-	else if(ans == 'l' || ans == 'L'){
-		DURATION = 1000;
-		printf("\nDuration was set to Low\n");
-	}
-	else{
-		printf("\nInvalid input using default\n");
-		DURATION = 3000;
+	switch(ans){
+		case 'h': case 'H':
+			DURATION = 5000;
+			printf("\nDuration was set to 5s\n");
+			break;
+		case 'm': case 'M':
+			DURATION = 3000;
+			printf("\nDuration was set to 3s\n");
+			break;
+		case 'l': case 'L':
+			DURATION = 1000;
+			printf("\nDuration was set to 1s\n");
+			break;
+		default:
+			DURATION = 3000;
+			printf("\nInvalid input using 3s\n");
 	}
 
 	printf("\n\nGame is starting\n");
@@ -137,13 +141,17 @@ int main(void){
 	BUTTON_Init();
 	Init_USARTx(1);
 	initializeDisplay();
-	// RNG_Init();
-
-	// srand("SOME RANDOM NUMBER"); // TODO: REILEY
+	RNG_Init();
 
 	uint32_t start;
 	int i,j, count;
 	char rxByte;
+	uint8_t data = 0xAA;
+	for(i = 0;i<12;i++){
+		SPI_Transfer_Byte(SPI2, data, 1);
+		delay(100);
+	}
+	
 
 	gameStartup();
 

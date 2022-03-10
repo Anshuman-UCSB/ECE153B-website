@@ -9,8 +9,8 @@ void SysTick_Init(void) {
 	// SysTick Reload Value Register
 	// Time = (Load+1)*period
 	// Time*frequency - 1 = Load
-	// Frequency = 8MHz/8
-	SysTick->LOAD = 1999;
+	// Frequency = 8MHz/80
+	SysTick->LOAD = 9999;
 	
 	// SysTick Current Value Register
 	SysTick->VAL = 0;
@@ -39,5 +39,6 @@ void SysTick_Handler(void) {
 
 void delay(uint32_t T) {
 	uint32_t currentTicks = msTicks; // Hint: It may be helpful to keep track of what the current tick count is
-	while (msTicks-currentTicks<=T);
+	while (msTicks-currentTicks<T);
+	msTicks = 0;
 }

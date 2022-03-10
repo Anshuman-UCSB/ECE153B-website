@@ -1,5 +1,6 @@
 
 #include "SPI.h"
+#include "SysTimer.h"
 
 // Note: When the data frame size is 8 bit, "SPIx->DR = byte_data;" works incorrectly. 
 // It mistakenly send two bytes out because SPIx->DR has 16 bits. To solve the program,
@@ -14,10 +15,10 @@ void SPI2_GPIO_Init(void) {
 	GPIOB->MODER |= GPIO_MODER_MODE9_0|GPIO_MODER_MODE10_0|GPIO_MODER_MODE11_0;
 
 	// Set OTYPER to push-pull
-	GPIOB->OTYPER &= ~(GPIO_OTYPER_OT9|GPIO_OTYPER_OT10|GPIO_OTYPER_OT11);
+	// GPIOB->OTYPER &= ~(GPIO_OTYPER_OT9|GPIO_OTYPER_OT10|GPIO_OTYPER_OT11);
 
 	// Set no PUPDR
-	GPIOB->PUPDR &= ~(GPIO_PUPDR_PUPDR9|GPIO_PUPDR_PUPDR10|GPIO_PUPDR_PUPDR11);
+	// GPIOB->PUPDR &= ~(GPIO_PUPDR_PUPDR9|GPIO_PUPDR_PUPDR10|GPIO_PUPDR_PUPDR11);
 
 	// Set to Alternate Function Mode
 	GPIOB->MODER &= ~GPIO_MODER_MODE13;
@@ -105,7 +106,9 @@ void SPI2_Init(void){
 void SPI_Transfer_Byte(SPI_TypeDef* SPIx, uint8_t write_data, int isData) {
 	// Wait for the Transmit Buffer Empty flag to become set.
 	setCS(0);
+	delay(1);
 	setDC(isData);
+	delay(1);
 	while((SPI2->SR&SPI_SR_TXE) == 0);
 	
 	// Write data to the SPIx->DR register to begin transmission.
@@ -114,13 +117,8 @@ void SPI_Transfer_Byte(SPI_TypeDef* SPIx, uint8_t write_data, int isData) {
 	// Wait for the Busy to become unset.
 	while((SPI2->SR&SPI_SR_BSY) != 0);
 
-	// not needed	
-	// // Wait for the Receive Not Empty flag to set for the data to be received.
-	// while((SPI2->SR&SPI_SR_RXNE) == 0);
-	
-	// // Read received data from the SPIx->DR register.
-	// *read_data = *((volatile uint8_t*)&SPIx->DR);
 	setCS(1);
+	delay(1);
 }
 
 void setReset(int boolean){
@@ -151,10 +149,11 @@ void initializeDisplay(void){
 	SPI2_GPIO_Init();
 	SPI2_Init();
 	setReset(0);
-	delay(1);
+	delay(20);
 	setReset(1);
 
-	uint8_t commands[18] = {
+	uint8_t commands[27] = {
+		0xAE, // Display Off
 		0xA8, // Set MUX Ratio
 		0x3F,
 		0xD3, // Set Display Offset
@@ -166,6 +165,8 @@ void initializeDisplay(void){
 		0x02,
 		0x81, // Set Contrast Control
 		0x7F,
+		0x20, // Set Memory Addressing Mode to horizontal scroll
+		0x00,
 		0xA4, // Disable Entire Display On
 		0xA6, // Set Normal Display
 		0xD5, // Set Osc Frequency
@@ -173,11 +174,17 @@ void initializeDisplay(void){
 		0x8D, // Enable charge pump regulator
 		0x14,
 		0xAF, // Display On
+		0x22, // Set page address range
+		0,
+		7,
+		0x21, // Column start and end address
+		0,
+		127,
 	};
+	// uint8_t commands[20] = {0xA8, 0x3F, 0xD3, 0x00, 0x40, 0xA0, 0xC0, 0xDA, 0x02, 0x81, 0x7f, 0x20, 0x00, 0xA4, 0xA6, 0xD5, 0x80, 0x8D, 0x14, 0xAF};
 
 	int i;
-	for(i =0 ;i<18;i++){
+	for(i =0 ;i<27;i++){
 		SPI_Transfer_Byte(SPI2, commands[i], 0);
 	}
-	
 }
