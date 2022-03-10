@@ -4,6 +4,10 @@ void RNG_Init(void){
     // Enable RNG Clock
     RCC->AHB2ENR |= RCC_AHB2ENR_RNGEN;
 
+    // Set MSI as RNG clock
+    
+
+    // Reset Clock
     RCC->AHB2RSTR |= RCC_AHB2RSTR_RNGRST;
     RCC->AHB2RSTR &= ~RCC_AHB2RSTR_RNGRST;
 

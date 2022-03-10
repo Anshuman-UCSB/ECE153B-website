@@ -7,6 +7,7 @@
 #include "SysTimer.h"
 #include "queue.h"
 #include "RNG.h"
+#include "I2C.h"
 
 #include <string.h>
 #include <stdio.h>
@@ -26,11 +27,24 @@ int main(void){
 	BUTTON_Init();
 	// RNG_Init();
 
+	I2C_GPIO_Init();
+	I2C_Initialization();
+	uint8_t SlaveAddress = 0x78<<1;
+	// uint8_t Data_Receive = 0;
+	uint8_t Data_Send = 0xA5;
+	Green_LED_Toggle();
+	I2C_SendData(I2C1, SlaveAddress, &Data_Send, 8);
+	Green_LED_Toggle();
+
+
 	// srand("SOME RANDOM NUMBER"); // TODO: REILEY
 
 	uint32_t start;
 	int i,j, count;
 	while(1){
+
+		// I2C_SendData(I2C1, SlaveAddress, &Data_Send, 1);
+
 
 		// SETUP
 		for(i = 0;i<BUTTONS;i++) LED_Off(i);

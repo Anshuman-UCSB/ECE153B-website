@@ -77,6 +77,7 @@ int LED_State(int led){
 		case 2:	return LED2_State();
 		case 3:	return LED3_State();
 	}
+	return 0;
 }
 
 void LED0_Off(void)  		{	GPIOC->ODR &= ~GPIO_ODR_OD0;}
