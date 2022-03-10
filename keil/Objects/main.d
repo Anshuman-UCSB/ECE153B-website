@@ -12,11 +12,9 @@
 .\objects\main.o: BUTTON.h
 .\objects\main.o: SysClock.h
 .\objects\main.o: SysTimer.h
-.\objects\main.o: queue.h
 .\objects\main.o: RNG.h
-.\objects\main.o: I2C.h
-.\objects\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\cstddef
-.\objects\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
+.\objects\main.o: SPI.h
+.\objects\main.o: UART.h
 .\objects\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
 .\objects\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
 .\objects\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
