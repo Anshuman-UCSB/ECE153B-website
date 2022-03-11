@@ -49,9 +49,8 @@ Section Cross References
     main.o(i.main) refers to spi.o(i.initializeDisplay) for initializeDisplay
     main.o(i.main) refers to rng.o(i.RNG_Init) for RNG_Init
     main.o(i.main) refers to oled.o(i.drawImage) for drawImage
-    main.o(i.main) refers to led.o(i.Green_LED_Toggle) for Green_LED_Toggle
     main.o(i.main) refers to systimer.o(i.delay) for delay
-    main.o(i.main) refers to main.o(.data) for hash
+    main.o(i.main) refers to main.o(.data) for title
     startup_stm32l476xx.o(STACK) refers (Special) to heapauxi.o(.text) for __use_two_region_memory
     startup_stm32l476xx.o(HEAP) refers (Special) to heapauxi.o(.text) for __use_two_region_memory
     startup_stm32l476xx.o(RESET) refers (Special) to heapauxi.o(.text) for __use_two_region_memory
@@ -224,6 +223,7 @@ Removing Unused input sections from the image.
     Removing led.o(.rev16_text), (4 bytes).
     Removing led.o(.revsh_text), (4 bytes).
     Removing led.o(.rrx_text), (6 bytes).
+    Removing led.o(i.Green_LED_Toggle), (18 bytes).
     Removing led.o(i.LED0_Off), (20 bytes).
     Removing led.o(i.LED0_On), (20 bytes).
     Removing led.o(i.LED0_Set), (18 bytes).
@@ -292,7 +292,7 @@ Removing Unused input sections from the image.
     Removing oled.o(.revsh_text), (4 bytes).
     Removing oled.o(.rrx_text), (6 bytes).
 
-70 unused section(s) (total 2965 bytes) removed from the image.
+71 unused section(s) (total 2983 bytes) removed from the image.
 
 ==============================================================================
 
@@ -308,24 +308,24 @@ Image Symbol Table
     ../clib/angel/boardlib.s                 0x00000000   Number         0  boardinit1.o ABSOLUTE
     ../clib/angel/dczerorl2.s                0x00000000   Number         0  __dczerorl2.o ABSOLUTE
     ../clib/angel/handlers.s                 0x00000000   Number         0  __scatter_zi.o ABSOLUTE
-    ../clib/angel/kernel.s                   0x00000000   Number         0  __rtentry.o ABSOLUTE
-    ../clib/angel/kernel.s                   0x00000000   Number         0  rtexit2.o ABSOLUTE
     ../clib/angel/kernel.s                   0x00000000   Number         0  rtexit.o ABSOLUTE
+    ../clib/angel/kernel.s                   0x00000000   Number         0  __rtentry.o ABSOLUTE
     ../clib/angel/kernel.s                   0x00000000   Number         0  __rtentry4.o ABSOLUTE
     ../clib/angel/kernel.s                   0x00000000   Number         0  __rtentry2.o ABSOLUTE
+    ../clib/angel/kernel.s                   0x00000000   Number         0  rtexit2.o ABSOLUTE
+    ../clib/angel/rt.s                       0x00000000   Number         0  rt_ctype_table.o ABSOLUTE
     ../clib/angel/rt.s                       0x00000000   Number         0  rt_locale_intlibspace.o ABSOLUTE
     ../clib/angel/rt.s                       0x00000000   Number         0  rt_locale.o ABSOLUTE
     ../clib/angel/rt.s                       0x00000000   Number         0  rt_raise.o ABSOLUTE
-    ../clib/angel/rt.s                       0x00000000   Number         0  rt_ctype_table.o ABSOLUTE
     ../clib/angel/scatter.s                  0x00000000   Number         0  __scatter.o ABSOLUTE
     ../clib/angel/startup.s                  0x00000000   Number         0  __main.o ABSOLUTE
-    ../clib/angel/sys.s                      0x00000000   Number         0  indicate_semi.o ABSOLUTE
     ../clib/angel/sys.s                      0x00000000   Number         0  use_no_semi.o ABSOLUTE
     ../clib/angel/sys.s                      0x00000000   Number         0  libspace.o ABSOLUTE
     ../clib/angel/sys.s                      0x00000000   Number         0  sys_stackheap_outer.o ABSOLUTE
+    ../clib/angel/sys.s                      0x00000000   Number         0  indicate_semi.o ABSOLUTE
+    ../clib/angel/sysapp.c                   0x00000000   Number         0  sys_command.o ABSOLUTE
     ../clib/angel/sysapp.c                   0x00000000   Number         0  sys_wrch.o ABSOLUTE
     ../clib/angel/sysapp.c                   0x00000000   Number         0  sys_exit.o ABSOLUTE
-    ../clib/angel/sysapp.c                   0x00000000   Number         0  sys_command.o ABSOLUTE
     ../clib/armsys.c                         0x00000000   Number         0  no_argv.o ABSOLUTE
     ../clib/armsys.c                         0x00000000   Number         0  _get_argv_nomalloc.o ABSOLUTE
     ../clib/armsys.c                         0x00000000   Number         0  argv_veneer.o ABSOLUTE
@@ -333,46 +333,46 @@ Image Symbol Table
     ../clib/ctype.c                          0x00000000   Number         0  isspace.o ABSOLUTE
     ../clib/heapalloc.c                      0x00000000   Number         0  hrguard.o ABSOLUTE
     ../clib/heapaux.c                        0x00000000   Number         0  heapauxi.o ABSOLUTE
-    ../clib/libinit.s                        0x00000000   Number         0  libshutdown2.o ABSOLUTE
-    ../clib/libinit.s                        0x00000000   Number         0  libinit.o ABSOLUTE
     ../clib/libinit.s                        0x00000000   Number         0  libinit2.o ABSOLUTE
+    ../clib/libinit.s                        0x00000000   Number         0  libinit.o ABSOLUTE
+    ../clib/libinit.s                        0x00000000   Number         0  libshutdown2.o ABSOLUTE
     ../clib/libinit.s                        0x00000000   Number         0  libshutdown.o ABSOLUTE
     ../clib/locale.s                         0x00000000   Number         0  lc_ctype_c.o ABSOLUTE
-    ../clib/memcpset.s                       0x00000000   Number         0  rt_memcpy_w.o ABSOLUTE
     ../clib/memcpset.s                       0x00000000   Number         0  strcmpv7m.o ABSOLUTE
-    ../clib/printf.c                         0x00000000   Number         0  _printf_char_common.o ABSOLUTE
+    ../clib/memcpset.s                       0x00000000   Number         0  rt_memcpy_w.o ABSOLUTE
     ../clib/printf.c                         0x00000000   Number         0  noretval__2printf.o ABSOLUTE
-    ../clib/printf.c                         0x00000000   Number         0  __2printf.o ABSOLUTE
+    ../clib/printf.c                         0x00000000   Number         0  _printf_char_common.o ABSOLUTE
     ../clib/printf.c                         0x00000000   Number         0  _printf_char_file.o ABSOLUTE
     ../clib/printf.c                         0x00000000   Number         0  __printf_nopercent.o ABSOLUTE
-    ../clib/scanf.c                          0x00000000   Number         0  _scanf_str.o ABSOLUTE
+    ../clib/printf.c                         0x00000000   Number         0  __2printf.o ABSOLUTE
     ../clib/scanf.c                          0x00000000   Number         0  scanf_char.o ABSOLUTE
+    ../clib/scanf.c                          0x00000000   Number         0  _scanf_str.o ABSOLUTE
     ../clib/scanf.c                          0x00000000   Number         0  scanf_char_file.o ABSOLUTE
-    ../clib/scanf.c                          0x00000000   Number         0  __0scanf.o ABSOLUTE
     ../clib/scanf.c                          0x00000000   Number         0  _scanf.o ABSOLUTE
-    ../clib/signal.c                         0x00000000   Number         0  defsig_stak_inner.o ABSOLUTE
+    ../clib/scanf.c                          0x00000000   Number         0  __0scanf.o ABSOLUTE
     ../clib/signal.c                         0x00000000   Number         0  defsig_rtred_inner.o ABSOLUTE
-    ../clib/signal.c                         0x00000000   Number         0  defsig_fpe_inner.o ABSOLUTE
     ../clib/signal.c                         0x00000000   Number         0  defsig_rtmem_inner.o ABSOLUTE
-    ../clib/signal.c                         0x00000000   Number         0  defsig_exit.o ABSOLUTE
-    ../clib/signal.c                         0x00000000   Number         0  defsig_rtmem_formal.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  defsig_fpe_inner.o ABSOLUTE
     ../clib/signal.c                         0x00000000   Number         0  defsig_rtmem_outer.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  defsig_exit.o ABSOLUTE
     ../clib/signal.c                         0x00000000   Number         0  defsig_general.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  __raise.o ABSOLUTE
     ../clib/signal.c                         0x00000000   Number         0  defsig_other.o ABSOLUTE
     ../clib/signal.c                         0x00000000   Number         0  defsig_segv_inner.o ABSOLUTE
-    ../clib/signal.c                         0x00000000   Number         0  defsig_abrt_inner.o ABSOLUTE
-    ../clib/signal.c                         0x00000000   Number         0  __raise.o ABSOLUTE
     ../clib/signal.c                         0x00000000   Number         0  defsig_cppl_inner.o ABSOLUTE
     ../clib/signal.c                         0x00000000   Number         0  defsig_pvfn_inner.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  defsig_stak_inner.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  defsig_rtmem_formal.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  defsig_abrt_inner.o ABSOLUTE
     ../clib/signal.s                         0x00000000   Number         0  defsig.o ABSOLUTE
-    ../clib/stdio.c                          0x00000000   Number         0  ferror_locked.o ABSOLUTE
     ../clib/stdio.c                          0x00000000   Number         0  backspace.o ABSOLUTE
     ../clib/stdio.c                          0x00000000   Number         0  ferror.o ABSOLUTE
     ../clib/stdio.c                          0x00000000   Number         0  backspace_locked.o ABSOLUTE
+    ../clib/stdio.c                          0x00000000   Number         0  ferror_locked.o ABSOLUTE
     ../clib/stdio.c                          0x00000000   Number         0  ungetc.o ABSOLUTE
     ../clib/stdlib.c                         0x00000000   Number         0  rand.o ABSOLUTE
-    ../clib/stdlib.c                         0x00000000   Number         0  rand.o ABSOLUTE
     ../clib/stdlib.c                         0x00000000   Number         0  exit.o ABSOLUTE
+    ../clib/stdlib.c                         0x00000000   Number         0  rand.o ABSOLUTE
     ../fplib/fpinit.s                        0x00000000   Number         0  fpinit.o ABSOLUTE
     BUTTON.c                                 0x00000000   Number         0  button.o ABSOLUTE
     BUTTON.c                                 0x00000000   Number         0  button.o ABSOLUTE
@@ -457,34 +457,33 @@ Image Symbol Table
     .text                                    0x08000400   Section        0  sys_exit.o(.text)
     i.BUTTON_Init                            0x0800040c   Section        0  button.o(i.BUTTON_Init)
     i.ClearScreen                            0x080004bc   Section        0  oled.o(i.ClearScreen)
-    i.Green_LED_Toggle                       0x080004dc   Section        0  led.o(i.Green_LED_Toggle)
-    i.LED_Init                               0x080004f0   Section        0  led.o(i.LED_Init)
-    i.RNG_Init                               0x08000608   Section        0  rng.o(i.RNG_Init)
-    i.SPI2_GPIO_Init                         0x08000668   Section        0  spi.o(i.SPI2_GPIO_Init)
-    i.SPI2_Init                              0x08000720   Section        0  spi.o(i.SPI2_Init)
-    i.SPI_Transfer_Byte                      0x08000828   Section        0  spi.o(i.SPI_Transfer_Byte)
-    i.SysTick_Handler                        0x08000868   Section        0  systimer.o(i.SysTick_Handler)
-    i.SysTick_Init                           0x08000878   Section        0  systimer.o(i.SysTick_Init)
-    i.System_Clock_Init                      0x08000904   Section        0  sysclock.o(i.System_Clock_Init)
-    i.UART_Clock                             0x0800090c   Section        0  sysclock.o(i.UART_Clock)
-    i.delay                                  0x08000a90   Section        0  systimer.o(i.delay)
-    i.drawImage                              0x08000aac   Section        0  oled.o(i.drawImage)
-    i.initializeDisplay                      0x08000ad0   Section        0  spi.o(i.initializeDisplay)
-    i.main                                   0x08000b30   Section        0  main.o(i.main)
-    i.setCS                                  0x08000b64   Section        0  spi.o(i.setCS)
-    i.setDC                                  0x08000b88   Section        0  spi.o(i.setDC)
-    i.setReset                               0x08000bac   Section        0  spi.o(i.setReset)
-    x$fpl$fpinit                             0x08000bd0   Section       10  fpinit.o(x$fpl$fpinit)
-    $v0                                      0x08000bd0   Number         0  fpinit.o(x$fpl$fpinit)
-    .data                                    0x20000000   Section     1044  main.o(.data)
-    .data                                    0x20000414   Section        4  systimer.o(.data)
-    .bss                                     0x20000418   Section      228  rand.o(.bss)
-    .bss                                     0x200004fc   Section       96  libspace.o(.bss)
-    HEAP                                     0x20000560   Section      512  startup_stm32l476xx.o(HEAP)
-    Heap_Mem                                 0x20000560   Data         512  startup_stm32l476xx.o(HEAP)
-    STACK                                    0x20000760   Section     1024  startup_stm32l476xx.o(STACK)
-    Stack_Mem                                0x20000760   Data        1024  startup_stm32l476xx.o(STACK)
-    __initial_sp                             0x20000b60   Data           0  startup_stm32l476xx.o(STACK)
+    i.LED_Init                               0x080004dc   Section        0  led.o(i.LED_Init)
+    i.RNG_Init                               0x080005f4   Section        0  rng.o(i.RNG_Init)
+    i.SPI2_GPIO_Init                         0x08000654   Section        0  spi.o(i.SPI2_GPIO_Init)
+    i.SPI2_Init                              0x0800070c   Section        0  spi.o(i.SPI2_Init)
+    i.SPI_Transfer_Byte                      0x08000814   Section        0  spi.o(i.SPI_Transfer_Byte)
+    i.SysTick_Handler                        0x08000854   Section        0  systimer.o(i.SysTick_Handler)
+    i.SysTick_Init                           0x08000864   Section        0  systimer.o(i.SysTick_Init)
+    i.System_Clock_Init                      0x080008f0   Section        0  sysclock.o(i.System_Clock_Init)
+    i.UART_Clock                             0x080008f8   Section        0  sysclock.o(i.UART_Clock)
+    i.delay                                  0x08000a7c   Section        0  systimer.o(i.delay)
+    i.drawImage                              0x08000a98   Section        0  oled.o(i.drawImage)
+    i.initializeDisplay                      0x08000abc   Section        0  spi.o(i.initializeDisplay)
+    i.main                                   0x08000b1c   Section        0  main.o(i.main)
+    i.setCS                                  0x08000b70   Section        0  spi.o(i.setCS)
+    i.setDC                                  0x08000b94   Section        0  spi.o(i.setDC)
+    i.setReset                               0x08000bb8   Section        0  spi.o(i.setReset)
+    x$fpl$fpinit                             0x08000bdc   Section       10  fpinit.o(x$fpl$fpinit)
+    $v0                                      0x08000bdc   Number         0  fpinit.o(x$fpl$fpinit)
+    .data                                    0x20000000   Section     4116  main.o(.data)
+    .data                                    0x20001014   Section        4  systimer.o(.data)
+    .bss                                     0x20001018   Section      228  rand.o(.bss)
+    .bss                                     0x200010fc   Section       96  libspace.o(.bss)
+    HEAP                                     0x20001160   Section      512  startup_stm32l476xx.o(HEAP)
+    Heap_Mem                                 0x20001160   Data         512  startup_stm32l476xx.o(HEAP)
+    STACK                                    0x20001360   Section     1024  startup_stm32l476xx.o(STACK)
+    Stack_Mem                                0x20001360   Data        1024  startup_stm32l476xx.o(STACK)
+    __initial_sp                             0x20001760   Data           0  startup_stm32l476xx.o(STACK)
 
     Global Symbols
 
@@ -530,10 +529,10 @@ Image Symbol Table
     _terminate_user_alloc                     - Undefined Weak Reference
     _terminateio                              - Undefined Weak Reference
     __Vectors_Size                           0x00000188   Number         0  startup_stm32l476xx.o ABSOLUTE
-    Image$$RW_IRAM1$$Length                  0x00000418   Number         0  anon$$obj.o ABSOLUTE
-    Image$$RW_IRAM1$$RW$$Length              0x00000418   Number         0  anon$$obj.o ABSOLUTE
     Image$$RW_IRAM1$$ZI$$Length              0x00000748   Number         0  anon$$obj.o ABSOLUTE
-    Image$$ER_IROM1$$RO$$Length              0x00000bfc   Number         0  anon$$obj.o ABSOLUTE
+    Image$$ER_IROM1$$RO$$Length              0x00000c08   Number         0  anon$$obj.o ABSOLUTE
+    Image$$RW_IRAM1$$Length                  0x00001018   Number         0  anon$$obj.o ABSOLUTE
+    Image$$RW_IRAM1$$RW$$Length              0x00001018   Number         0  anon$$obj.o ABSOLUTE
     Image$$ER_IROM1$$RO$$Base                0x08000000   Number         0  anon$$obj.o ABSOLUTE
     Load$$ER_IROM1$$Base                     0x08000000   Number         0  anon$$obj.o ABSOLUTE
     __Vectors                                0x08000000   Data           4  startup_stm32l476xx.o(RESET)
@@ -700,51 +699,53 @@ Image Symbol Table
     _sys_exit                                0x08000401   Thumb Code     8  sys_exit.o(.text)
     BUTTON_Init                              0x0800040d   Thumb Code   166  button.o(i.BUTTON_Init)
     ClearScreen                              0x080004bd   Thumb Code    26  oled.o(i.ClearScreen)
-    Green_LED_Toggle                         0x080004dd   Thumb Code    18  led.o(i.Green_LED_Toggle)
-    LED_Init                                 0x080004f1   Thumb Code   270  led.o(i.LED_Init)
-    RNG_Init                                 0x08000609   Thumb Code    88  rng.o(i.RNG_Init)
-    SPI2_GPIO_Init                           0x08000669   Thumb Code   166  spi.o(i.SPI2_GPIO_Init)
-    SPI2_Init                                0x08000721   Thumb Code   254  spi.o(i.SPI2_Init)
-    SPI_Transfer_Byte                        0x08000829   Thumb Code    58  spi.o(i.SPI_Transfer_Byte)
-    SysTick_Handler                          0x08000869   Thumb Code    12  systimer.o(i.SysTick_Handler)
-    SysTick_Init                             0x08000879   Thumb Code   130  systimer.o(i.SysTick_Init)
-    System_Clock_Init                        0x08000905   Thumb Code     8  sysclock.o(i.System_Clock_Init)
-    UART_Clock                               0x0800090d   Thumb Code   380  sysclock.o(i.UART_Clock)
-    delay                                    0x08000a91   Thumb Code    24  systimer.o(i.delay)
-    drawImage                                0x08000aad   Thumb Code    32  oled.o(i.drawImage)
-    initializeDisplay                        0x08000ad1   Thumb Code    66  spi.o(i.initializeDisplay)
-    main                                     0x08000b31   Thumb Code    46  main.o(i.main)
-    setCS                                    0x08000b65   Thumb Code    30  spi.o(i.setCS)
-    setDC                                    0x08000b89   Thumb Code    30  spi.o(i.setDC)
-    setReset                                 0x08000bad   Thumb Code    30  spi.o(i.setReset)
-    _fp_init                                 0x08000bd1   Thumb Code    10  fpinit.o(x$fpl$fpinit)
-    __fplib_config_fpu_vfp                   0x08000bd9   Thumb Code     0  fpinit.o(x$fpl$fpinit)
-    __fplib_config_pureend_doubles           0x08000bd9   Thumb Code     0  fpinit.o(x$fpl$fpinit)
-    Region$$Table$$Base                      0x08000bdc   Number         0  anon$$obj.o(Region$$Table)
-    Image$$ER_IROM1$$RO$$Limit               0x08000bfc   Number         0  anon$$obj.o ABSOLUTE
-    Image$$ER_IROM1$$RW$$Base                0x08000bfc   Number         0  anon$$obj.o ABSOLUTE
-    Image$$ER_IROM1$$RW$$Limit               0x08000bfc   Number         0  anon$$obj.o ABSOLUTE
-    Image$$ER_IROM1$$ZI$$Base                0x08000bfc   Number         0  anon$$obj.o ABSOLUTE
-    Image$$ER_IROM1$$ZI$$Limit               0x08000bfc   Number         0  anon$$obj.o ABSOLUTE
-    Load$$RW_IRAM1$$Base                     0x08000bfc   Number         0  anon$$obj.o ABSOLUTE
-    Region$$Table$$Limit                     0x08000bfc   Number         0  anon$$obj.o(Region$$Table)
+    LED_Init                                 0x080004dd   Thumb Code   270  led.o(i.LED_Init)
+    RNG_Init                                 0x080005f5   Thumb Code    88  rng.o(i.RNG_Init)
+    SPI2_GPIO_Init                           0x08000655   Thumb Code   166  spi.o(i.SPI2_GPIO_Init)
+    SPI2_Init                                0x0800070d   Thumb Code   254  spi.o(i.SPI2_Init)
+    SPI_Transfer_Byte                        0x08000815   Thumb Code    58  spi.o(i.SPI_Transfer_Byte)
+    SysTick_Handler                          0x08000855   Thumb Code    12  systimer.o(i.SysTick_Handler)
+    SysTick_Init                             0x08000865   Thumb Code   130  systimer.o(i.SysTick_Init)
+    System_Clock_Init                        0x080008f1   Thumb Code     8  sysclock.o(i.System_Clock_Init)
+    UART_Clock                               0x080008f9   Thumb Code   380  sysclock.o(i.UART_Clock)
+    delay                                    0x08000a7d   Thumb Code    24  systimer.o(i.delay)
+    drawImage                                0x08000a99   Thumb Code    32  oled.o(i.drawImage)
+    initializeDisplay                        0x08000abd   Thumb Code    66  spi.o(i.initializeDisplay)
+    main                                     0x08000b1d   Thumb Code    70  main.o(i.main)
+    setCS                                    0x08000b71   Thumb Code    30  spi.o(i.setCS)
+    setDC                                    0x08000b95   Thumb Code    30  spi.o(i.setDC)
+    setReset                                 0x08000bb9   Thumb Code    30  spi.o(i.setReset)
+    _fp_init                                 0x08000bdd   Thumb Code    10  fpinit.o(x$fpl$fpinit)
+    __fplib_config_fpu_vfp                   0x08000be5   Thumb Code     0  fpinit.o(x$fpl$fpinit)
+    __fplib_config_pureend_doubles           0x08000be5   Thumb Code     0  fpinit.o(x$fpl$fpinit)
+    Region$$Table$$Base                      0x08000be8   Number         0  anon$$obj.o(Region$$Table)
+    Image$$ER_IROM1$$RO$$Limit               0x08000c08   Number         0  anon$$obj.o ABSOLUTE
+    Image$$ER_IROM1$$RW$$Base                0x08000c08   Number         0  anon$$obj.o ABSOLUTE
+    Image$$ER_IROM1$$RW$$Limit               0x08000c08   Number         0  anon$$obj.o ABSOLUTE
+    Image$$ER_IROM1$$ZI$$Base                0x08000c08   Number         0  anon$$obj.o ABSOLUTE
+    Image$$ER_IROM1$$ZI$$Limit               0x08000c08   Number         0  anon$$obj.o ABSOLUTE
+    Load$$RW_IRAM1$$Base                     0x08000c08   Number         0  anon$$obj.o ABSOLUTE
+    Region$$Table$$Limit                     0x08000c08   Number         0  anon$$obj.o(Region$$Table)
     Image$$RW_IRAM1$$Base                    0x20000000   Number         0  anon$$obj.o ABSOLUTE
     Image$$RW_IRAM1$$RO$$Base                0x20000000   Number         0  anon$$obj.o ABSOLUTE
     Image$$RW_IRAM1$$RW$$Base                0x20000000   Number         0  anon$$obj.o ABSOLUTE
     hash                                     0x20000000   Data        1024  main.o(.data)
-    CHOOSE                                   0x20000400   Data           4  main.o(.data)
-    BUTTONS                                  0x20000404   Data           4  main.o(.data)
-    LOSE_PENALTY                             0x20000408   Data           4  main.o(.data)
-    ROUND_STARTUP                            0x2000040c   Data           4  main.o(.data)
-    DURATION                                 0x20000410   Data           4  main.o(.data)
-    msTicks                                  0x20000414   Data           4  systimer.o(.data)
-    Image$$RW_IRAM1$$Limit                   0x20000418   Number         0  anon$$obj.o ABSOLUTE
-    Image$$RW_IRAM1$$RW$$Limit               0x20000418   Number         0  anon$$obj.o ABSOLUTE
-    Image$$RW_IRAM1$$ZI$$Base                0x20000418   Number         0  anon$$obj.o ABSOLUTE
-    _random_number_data                      0x20000418   Data         228  rand.o(.bss)
-    __libspace_start                         0x200004fc   Data          96  libspace.o(.bss)
-    __temporary_stack_top$libspace           0x2000055c   Data           0  libspace.o(.bss)
-    Image$$RW_IRAM1$$ZI$$Limit               0x20000b60   Number         0  anon$$obj.o ABSOLUTE
+    lose                                     0x20000400   Data        1024  main.o(.data)
+    win                                      0x20000800   Data        1024  main.o(.data)
+    title                                    0x20000c00   Data        1024  main.o(.data)
+    CHOOSE                                   0x20001000   Data           4  main.o(.data)
+    BUTTONS                                  0x20001004   Data           4  main.o(.data)
+    LOSE_PENALTY                             0x20001008   Data           4  main.o(.data)
+    ROUND_STARTUP                            0x2000100c   Data           4  main.o(.data)
+    DURATION                                 0x20001010   Data           4  main.o(.data)
+    msTicks                                  0x20001014   Data           4  systimer.o(.data)
+    Image$$RW_IRAM1$$Limit                   0x20001018   Number         0  anon$$obj.o ABSOLUTE
+    Image$$RW_IRAM1$$RW$$Limit               0x20001018   Number         0  anon$$obj.o ABSOLUTE
+    Image$$RW_IRAM1$$ZI$$Base                0x20001018   Number         0  anon$$obj.o ABSOLUTE
+    _random_number_data                      0x20001018   Data         228  rand.o(.bss)
+    __libspace_start                         0x200010fc   Data          96  libspace.o(.bss)
+    __temporary_stack_top$libspace           0x2000115c   Data           0  libspace.o(.bss)
+    Image$$RW_IRAM1$$ZI$$Limit               0x20001760   Number         0  anon$$obj.o ABSOLUTE
 
 
 
@@ -754,9 +755,9 @@ Memory Map of the image
 
   Image Entry point : 0x08000189
 
-  Load Region LR_IROM1 (Base: 0x08000000, Size: 0x00001014, Max: 0x00100000, ABSOLUTE, COMPRESSED[0x00000d00])
+  Load Region LR_IROM1 (Base: 0x08000000, Size: 0x00001c20, Max: 0x00100000, ABSOLUTE, COMPRESSED[0x00001030])
 
-    Execution Region ER_IROM1 (Exec base: 0x08000000, Load base: 0x08000000, Size: 0x00000bfc, Max: 0x00100000, ABSOLUTE)
+    Execution Region ER_IROM1 (Exec base: 0x08000000, Load base: 0x08000000, Size: 0x00000c08, Max: 0x00100000, ABSOLUTE)
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
@@ -824,40 +825,38 @@ Memory Map of the image
     0x08000400   0x08000400   0x0000000c   Code   RO          788    .text               c_w.l(sys_exit.o)
     0x0800040c   0x0800040c   0x000000b0   Code   RO          331    i.BUTTON_Init       button.o
     0x080004bc   0x080004bc   0x00000020   Code   RO          598    i.ClearScreen       oled.o
-    0x080004dc   0x080004dc   0x00000012   Code   RO            4    i.Green_LED_Toggle  led.o
-    0x080004ee   0x080004ee   0x00000002   PAD
-    0x080004f0   0x080004f0   0x00000118   Code   RO           25    i.LED_Init          led.o
-    0x08000608   0x08000608   0x00000060   Code   RO          404    i.RNG_Init          rng.o
-    0x08000668   0x08000668   0x000000b8   Code   RO          435    i.SPI2_GPIO_Init    spi.o
-    0x08000720   0x08000720   0x00000108   Code   RO          436    i.SPI2_Init         spi.o
-    0x08000828   0x08000828   0x00000040   Code   RO          437    i.SPI_Transfer_Byte  spi.o
-    0x08000868   0x08000868   0x00000010   Code   RO          361    i.SysTick_Handler   systimer.o
-    0x08000878   0x08000878   0x0000008c   Code   RO          362    i.SysTick_Init      systimer.o
-    0x08000904   0x08000904   0x00000008   Code   RO          301    i.System_Clock_Init  sysclock.o
-    0x0800090c   0x0800090c   0x00000184   Code   RO          302    i.UART_Clock        sysclock.o
-    0x08000a90   0x08000a90   0x0000001c   Code   RO          363    i.delay             systimer.o
-    0x08000aac   0x08000aac   0x00000024   Code   RO          599    i.drawImage         oled.o
-    0x08000ad0   0x08000ad0   0x00000060   Code   RO          438    i.initializeDisplay  spi.o
-    0x08000b30   0x08000b30   0x00000034   Code   RO          218    i.main              main.o
-    0x08000b64   0x08000b64   0x00000024   Code   RO          439    i.setCS             spi.o
-    0x08000b88   0x08000b88   0x00000024   Code   RO          440    i.setDC             spi.o
-    0x08000bac   0x08000bac   0x00000024   Code   RO          441    i.setReset          spi.o
-    0x08000bd0   0x08000bd0   0x0000000a   Code   RO          725    x$fpl$fpinit        fz_wm.l(fpinit.o)
-    0x08000bda   0x08000bda   0x00000002   PAD
-    0x08000bdc   0x08000bdc   0x00000020   Data   RO          837    Region$$Table       anon$$obj.o
+    0x080004dc   0x080004dc   0x00000118   Code   RO           25    i.LED_Init          led.o
+    0x080005f4   0x080005f4   0x00000060   Code   RO          404    i.RNG_Init          rng.o
+    0x08000654   0x08000654   0x000000b8   Code   RO          435    i.SPI2_GPIO_Init    spi.o
+    0x0800070c   0x0800070c   0x00000108   Code   RO          436    i.SPI2_Init         spi.o
+    0x08000814   0x08000814   0x00000040   Code   RO          437    i.SPI_Transfer_Byte  spi.o
+    0x08000854   0x08000854   0x00000010   Code   RO          361    i.SysTick_Handler   systimer.o
+    0x08000864   0x08000864   0x0000008c   Code   RO          362    i.SysTick_Init      systimer.o
+    0x080008f0   0x080008f0   0x00000008   Code   RO          301    i.System_Clock_Init  sysclock.o
+    0x080008f8   0x080008f8   0x00000184   Code   RO          302    i.UART_Clock        sysclock.o
+    0x08000a7c   0x08000a7c   0x0000001c   Code   RO          363    i.delay             systimer.o
+    0x08000a98   0x08000a98   0x00000024   Code   RO          599    i.drawImage         oled.o
+    0x08000abc   0x08000abc   0x00000060   Code   RO          438    i.initializeDisplay  spi.o
+    0x08000b1c   0x08000b1c   0x00000054   Code   RO          218    i.main              main.o
+    0x08000b70   0x08000b70   0x00000024   Code   RO          439    i.setCS             spi.o
+    0x08000b94   0x08000b94   0x00000024   Code   RO          440    i.setDC             spi.o
+    0x08000bb8   0x08000bb8   0x00000024   Code   RO          441    i.setReset          spi.o
+    0x08000bdc   0x08000bdc   0x0000000a   Code   RO          725    x$fpl$fpinit        fz_wm.l(fpinit.o)
+    0x08000be6   0x08000be6   0x00000002   PAD
+    0x08000be8   0x08000be8   0x00000020   Data   RO          837    Region$$Table       anon$$obj.o
 
 
-    Execution Region RW_IRAM1 (Exec base: 0x20000000, Load base: 0x08000bfc, Size: 0x00000b60, Max: 0x00018000, ABSOLUTE, COMPRESSED[0x00000104])
+    Execution Region RW_IRAM1 (Exec base: 0x20000000, Load base: 0x08000c08, Size: 0x00001760, Max: 0x00018000, ABSOLUTE, COMPRESSED[0x00000428])
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
-    0x20000000   COMPRESSED   0x00000414   Data   RW          220    .data               main.o
-    0x20000414   COMPRESSED   0x00000004   Data   RW          364    .data               systimer.o
-    0x20000418        -       0x000000e4   Zero   RW          637    .bss                c_w.l(rand.o)
-    0x200004fc        -       0x00000060   Zero   RW          752    .bss                c_w.l(libspace.o)
-    0x2000055c   COMPRESSED   0x00000004   PAD
-    0x20000560        -       0x00000200   Zero   RW          292    HEAP                startup_stm32l476xx.o
-    0x20000760        -       0x00000400   Zero   RW          291    STACK               startup_stm32l476xx.o
+    0x20000000   COMPRESSED   0x00001014   Data   RW          220    .data               main.o
+    0x20001014   COMPRESSED   0x00000004   Data   RW          364    .data               systimer.o
+    0x20001018        -       0x000000e4   Zero   RW          637    .bss                c_w.l(rand.o)
+    0x200010fc        -       0x00000060   Zero   RW          752    .bss                c_w.l(libspace.o)
+    0x2000115c   COMPRESSED   0x00000004   PAD
+    0x20001160        -       0x00000200   Zero   RW          292    HEAP                startup_stm32l476xx.o
+    0x20001360        -       0x00000400   Zero   RW          291    STACK               startup_stm32l476xx.o
 
 
 ==============================================================================
@@ -868,8 +867,8 @@ Image component sizes
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   Object Name
 
        176         10          0          0          0        502   button.o
-       298         10          0          0          0     317938   led.o
-        52          6          0       1044          0       1137   main.o
+       280         10          0          0          0     317491   led.o
+        84         14          0       4116          0       1264   main.o
         68         10          0          0          0       1318   oled.o
         96          8          0          0          0        479   rng.o
        716         82          0          0          0       3960   spi.o
@@ -878,9 +877,9 @@ Image component sizes
        184         18          0          4          0      32254   systimer.o
 
     ----------------------------------------------------------------------
-      2120        194        424       1048       1536     359541   Object Totals
+      2132        202        424       4120       1536     359221   Object Totals
          0          0         32          0          0          0   (incl. Generated)
-         2          0          0          0          0          0   (incl. Padding)
+         0          0          0          0          0          0   (incl. Padding)
 
     ----------------------------------------------------------------------
 
@@ -931,15 +930,15 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   
 
-      2644        224        424       1048       1864     358653   Grand Totals
-      2644        224        424        260       1864     358653   ELF Image Totals (compressed)
-      2644        224        424        260          0          0   ROM Totals
+      2656        232        424       4120       1864     358433   Grand Totals
+      2656        232        424       1064       1864     358433   ELF Image Totals (compressed)
+      2656        232        424       1064          0          0   ROM Totals
 
 ==============================================================================
 
-    Total RO  Size (Code + RO Data)                 3068 (   3.00kB)
-    Total RW  Size (RW Data + ZI Data)              2912 (   2.84kB)
-    Total ROM Size (Code + RO Data + RW Data)       3328 (   3.25kB)
+    Total RO  Size (Code + RO Data)                 3080 (   3.01kB)
+    Total RW  Size (RW Data + ZI Data)              5984 (   5.84kB)
+    Total ROM Size (Code + RO Data + RW Data)       4144 (   4.05kB)
 
 ==============================================================================
 

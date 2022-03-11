@@ -145,15 +145,17 @@ int main(void){
 	initializeDisplay();
 	RNG_Init();
 
-	drawImage(hash);
+	drawImage(title);
 
 	//gameStartup();
 
 
 	while(1){
 
-		Green_LED_Toggle();
-		delay(1000);
+		drawImage(win);
+		delay(2000);
+		drawImage(lose);
+		delay(2000);
 
 
 		// // SETUP
