@@ -9,10 +9,11 @@
 void SPI2_GPIO_Init(void) {
 	// Enable GPIOB clock
 	RCC->AHB2ENR |= RCC_AHB2ENR_GPIOBEN;
+	RCC->AHB2ENR |= RCC_AHB2ENR_GPIOCEN;
 	
 	// Set PB 9,10,11 to output
-	GPIOB->MODER &= ~(GPIO_MODER_MODE9|GPIO_MODER_MODE10|GPIO_MODER_MODE11);
-	GPIOB->MODER |= GPIO_MODER_MODE9_0|GPIO_MODER_MODE10_0|GPIO_MODER_MODE11_0;
+	GPIOC->MODER &= ~(GPIO_MODER_MODE6|GPIO_MODER_MODE8|GPIO_MODER_MODE9);
+	GPIOC->MODER |= GPIO_MODER_MODE6_0|GPIO_MODER_MODE8_0|GPIO_MODER_MODE9_0;
 
 	// Set OTYPER to push-pull
 	// GPIOB->OTYPER &= ~(GPIO_OTYPER_OT9|GPIO_OTYPER_OT10|GPIO_OTYPER_OT11);
@@ -123,25 +124,25 @@ void SPI_Transfer_Byte(SPI_TypeDef* SPIx, uint8_t write_data, int isData) {
 
 void setReset(int boolean){
 	if(boolean){
-		GPIOB->ODR |= GPIO_ODR_OD9;
+		GPIOC->ODR |= GPIO_ODR_OD6;
 	}else{
-		GPIOB->ODR &= ~GPIO_ODR_OD9;
+		GPIOC->ODR &= ~GPIO_ODR_OD6;
 	}
 }
 
 void setCS(int boolean){
 	if(boolean){
-		GPIOB->ODR |= GPIO_ODR_OD10;
+		GPIOC->ODR |= GPIO_ODR_OD8;
 	}else{
-		GPIOB->ODR &= ~GPIO_ODR_OD10;
+		GPIOC->ODR &= ~GPIO_ODR_OD8;
 	}
 }
 
 void setDC(int boolean){
 	if(boolean){
-		GPIOB->ODR |= GPIO_ODR_OD11;
+		GPIOC->ODR |= GPIO_ODR_OD9;
 	}else{
-		GPIOB->ODR &= ~GPIO_ODR_OD11;
+		GPIOC->ODR &= ~GPIO_ODR_OD9;
 	}
 }
 

@@ -8,6 +8,7 @@
 #include "RNG.h"
 #include "SPI.h"
 #include "UART.h"
+#include "OLED.h"
 
 #include <string.h>
 #include <stdio.h>
@@ -143,15 +144,18 @@ int main(void){
 	initializeDisplay();
 	RNG_Init();
 
+	OLED_ClearScreen();
 	// uint32_t start;
-	// int i,j, count;
+	int i,j, count;
 	// char rxByte;
-	// uint8_t data = 0xAA;
-	// for(i = 0;i<12;i++){
-	// 	SPI_Transfer_Byte(SPI2, data, 1);
-	// 	delay(100);
-	// }
-	
+	uint8_t data = 0xAA;
+	for(i = 0;i<12;i++){
+		SPI_Transfer_Byte(SPI2, data, 1);
+		delay(100);
+	}
+
+
+
 
 	//gameStartup();
 
