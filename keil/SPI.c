@@ -12,14 +12,8 @@ void SPI2_GPIO_Init(void) {
 	RCC->AHB2ENR |= RCC_AHB2ENR_GPIOCEN;
 	
 	// Set PB 9,10,11 to output
-	GPIOC->MODER &= ~(GPIO_MODER_MODE6|GPIO_MODER_MODE8|GPIO_MODER_MODE9);
-	GPIOC->MODER |= GPIO_MODER_MODE6_0|GPIO_MODER_MODE8_0|GPIO_MODER_MODE9_0;
-
-	// Set OTYPER to push-pull
-	// GPIOB->OTYPER &= ~(GPIO_OTYPER_OT9|GPIO_OTYPER_OT10|GPIO_OTYPER_OT11);
-
-	// Set no PUPDR
-	// GPIOB->PUPDR &= ~(GPIO_PUPDR_PUPDR9|GPIO_PUPDR_PUPDR10|GPIO_PUPDR_PUPDR11);
+	GPIOC->MODER &= ~(GPIO_MODER_MODE10|GPIO_MODER_MODE11|GPIO_MODER_MODE12);
+	GPIOC->MODER |= GPIO_MODER_MODE10_0|GPIO_MODER_MODE11_0|GPIO_MODER_MODE12_0;
 
 	// Set to Alternate Function Mode
 	GPIOB->MODER &= ~GPIO_MODER_MODE13;
@@ -124,25 +118,25 @@ void SPI_Transfer_Byte(SPI_TypeDef* SPIx, uint8_t write_data, int isData) {
 
 void setReset(int boolean){
 	if(boolean){
-		GPIOC->ODR |= GPIO_ODR_OD6;
+		GPIOC->ODR |= GPIO_ODR_OD10;
 	}else{
-		GPIOC->ODR &= ~GPIO_ODR_OD6;
+		GPIOC->ODR &= ~GPIO_ODR_OD10;
 	}
 }
 
 void setCS(int boolean){
 	if(boolean){
-		GPIOC->ODR |= GPIO_ODR_OD8;
+		GPIOC->ODR |= GPIO_ODR_OD12;
 	}else{
-		GPIOC->ODR &= ~GPIO_ODR_OD8;
+		GPIOC->ODR &= ~GPIO_ODR_OD12;
 	}
 }
 
 void setDC(int boolean){
 	if(boolean){
-		GPIOC->ODR |= GPIO_ODR_OD9;
+		GPIOC->ODR |= GPIO_ODR_OD11;
 	}else{
-		GPIOC->ODR &= ~GPIO_ODR_OD9;
+		GPIOC->ODR &= ~GPIO_ODR_OD11;
 	}
 }
 
@@ -153,7 +147,7 @@ void initializeDisplay(void){
 	delay(20);
 	setReset(1);
 
-	uint8_t commands[27] = {
+	uint8_t commands[21] = {
 		0xAE, // Display Off
 		0xA8, // Set MUX Ratio
 		0x3F,
@@ -175,17 +169,11 @@ void initializeDisplay(void){
 		0x8D, // Enable charge pump regulator
 		0x14,
 		0xAF, // Display On
-		0x22, // Set page address range
-		0,
-		7,
-		0x21, // Column start and end address
-		0,
-		127,
 	};
 	// uint8_t commands[20] = {0xA8, 0x3F, 0xD3, 0x00, 0x40, 0xA0, 0xC0, 0xDA, 0x02, 0x81, 0x7f, 0x20, 0x00, 0xA4, 0xA6, 0xD5, 0x80, 0x8D, 0x14, 0xAF};
 
 	int i;
-	for(i =0 ;i<27;i++){
+	for(i =0 ;i<21;i++){
 		SPI_Transfer_Byte(SPI2, commands[i], 0);
 	}
 }

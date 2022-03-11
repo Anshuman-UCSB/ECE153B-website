@@ -144,7 +144,7 @@ int main(void){
 	initializeDisplay();
 	RNG_Init();
 
-	OLED_ClearScreen();
+	ClearScreen();
 	// uint32_t start;
 	int i,j, count;
 	// char rxByte;

@@ -2,6 +2,6 @@
 #define OLED_HJAHAHAHAH
 #include "stm32l476xx.h"
 
-void OLED_ClearScreen(void);
+void ClearScreen(void);
 
 #endif
