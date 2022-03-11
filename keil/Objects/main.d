@@ -15,6 +15,7 @@
 .\objects\main.o: SPI.h
 .\objects\main.o: UART.h
 .\objects\main.o: OLED.h
+.\objects\main.o: hash.h
 .\objects\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
 .\objects\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
 .\objects\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h

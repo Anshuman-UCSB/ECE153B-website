@@ -9,6 +9,7 @@
 #include "SPI.h"
 #include "UART.h"
 #include "OLED.h"
+#include "hash.h"
 
 #include <string.h>
 #include <stdio.h>
@@ -144,18 +145,7 @@ int main(void){
 	initializeDisplay();
 	RNG_Init();
 
-	ClearScreen();
-	// uint32_t start;
-	int i,j, count;
-	// char rxByte;
-	uint8_t data = 0xAA;
-	for(i = 0;i<12;i++){
-		SPI_Transfer_Byte(SPI2, data, 1);
-		delay(100);
-	}
-
-
-
+	drawImage(hash);
 
 	//gameStartup();
 

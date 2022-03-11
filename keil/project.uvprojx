@@ -483,6 +483,11 @@
               <FileType>5</FileType>
               <FilePath>.\OLED.h</FilePath>
             </File>
+            <File>
+              <FileName>hash.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\hash.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

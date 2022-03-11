@@ -101,9 +101,7 @@ void SPI2_Init(void){
 void SPI_Transfer_Byte(SPI_TypeDef* SPIx, uint8_t write_data, int isData) {
 	// Wait for the Transmit Buffer Empty flag to become set.
 	setCS(0);
-	delay(1);
 	setDC(isData);
-	delay(1);
 	while((SPI2->SR&SPI_SR_TXE) == 0);
 	
 	// Write data to the SPIx->DR register to begin transmission.
@@ -113,7 +111,6 @@ void SPI_Transfer_Byte(SPI_TypeDef* SPIx, uint8_t write_data, int isData) {
 	while((SPI2->SR&SPI_SR_BSY) != 0);
 
 	setCS(1);
-	delay(1);
 }
 
 void setReset(int boolean){
@@ -147,7 +144,7 @@ void initializeDisplay(void){
 	delay(20);
 	setReset(1);
 
-	uint8_t commands[21] = {
+	uint8_t commands[23] = {
 		0xAE, // Display Off
 		0xA8, // Set MUX Ratio
 		0x3F,
@@ -164,6 +161,8 @@ void initializeDisplay(void){
 		0x00,
 		0xA4, // Disable Entire Display On
 		0xA6, // Set Normal Display
+		0xDA, // Set COM pins hardware config
+		0x12,
 		0xD5, // Set Osc Frequency
 		0x80,
 		0x8D, // Enable charge pump regulator
@@ -173,7 +172,7 @@ void initializeDisplay(void){
 	// uint8_t commands[20] = {0xA8, 0x3F, 0xD3, 0x00, 0x40, 0xA0, 0xC0, 0xDA, 0x02, 0x81, 0x7f, 0x20, 0x00, 0xA4, 0xA6, 0xD5, 0x80, 0x8D, 0x14, 0xAF};
 
 	int i;
-	for(i =0 ;i<21;i++){
+	for(i =0 ;i<23;i++){
 		SPI_Transfer_Byte(SPI2, commands[i], 0);
 	}
 }
