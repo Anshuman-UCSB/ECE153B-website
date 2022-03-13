@@ -20,12 +20,14 @@
 extern uint32_t volatile msTicks;
 
 
-int CHOOSE = 1;
-int BUTTONS = 2;
+int CHOOSE = 2;
+int BUTTONS = 4;
 int LOSE_PENALTY = 1500;
 int ROUND_STARTUP = 500;
 int VIBRATION_TIME = 50;
 uint32_t DURATION = 3000;
+int simulated_buttons[4];
+int i, j, count, start;
 
 int main(void){
 	System_Clock_Init();
@@ -38,39 +40,41 @@ int main(void){
 	// delay(1000);
 	// Motor(1000);
 
+	//drawImage(title);
 
-	// drawImage(title);
+	// gameStartup();
 
-	gameStartup();
-
-	int i, j, count, start;
 	while(1){
-		delay(1000);
-		//Green_LED_Toggle();
-		// delay(2000);
-		// delay(2000);
-
-
 		// SETUP
+		//ClearScreen();
 		for(i = 0;i<BUTTONS;i++) LED_Off(i);
-		delay(ROUND_STARTUP);
+		// delay(ROUND_STARTUP);
 		count = CHOOSE;
+		for(i=0;i<4;i++) simulated_buttons[i] = 0;
 		while(count){
 			i = rand()%BUTTONS;
-			if(LED_State(i) == 0){
-				count--;
-				LED_On(i);
+			if(simulated_buttons[i]==0)
+				simulated_buttons[i] = 1;
+			count = CHOOSE;
+			for(i = 0;i<4;i++)
+				count -= simulated_buttons[i];
+		}
+		for(i = 0;i<BUTTONS;i++){
+			if(simulated_buttons[i]){
+				while(LED_State(i)==0)
+					LED_On(i);
 			}
 		}
 		// By here, <count> led's have been turned on
 		start = msTicks;
-		while(msTicks-start < DURATION){
+		count = CHOOSE;
+		while(msTicks-start < DURATION || 1){
 			for(i = 0;i<BUTTONS;i++){
-				if(isPressed(i)) LED_Off(i);
+				if(isPressed(i) && LED_State(i)){
+					LED_Off(i);
+					count--;
+				}
 			}
-			count = 0;
-			for(i = 0;i<BUTTONS;i++)
-				count|=LED_State(i);
 			if(count == 0)
 				goto win;
 		}
@@ -78,7 +82,7 @@ int main(void){
 
 		// WIN STATE
 		win:
-		drawImage(win);
+		//drawImage(win);
 		for(i = 0;i<BUTTONS;i++) LED_Off(i);
 		delay(100);
 		for(i=0;i<4;i++){
@@ -91,7 +95,7 @@ int main(void){
 
 		// LOSE STATE
 		incorrect:
-		drawImage(lose);
+		//drawImage(lose);
 		for(i = 0;i<BUTTONS;i++) LED_Off(i);
 		delay(500);
 		for(i = 0;i<BUTTONS;i++)

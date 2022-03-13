@@ -1,4 +1,5 @@
 #include "LED.h"
+#include <assert.h>
 
 void LED_Init(void) {
 	// Enable GPIO Clocks
@@ -80,7 +81,7 @@ int LED_State(int led){
 		case 2:	return LED2_State();
 		case 3:	return LED3_State();
 	}
-	return 0;
+    assert(0);
 }
 
 void LED0_Off(void)  		{	GPIOC->ODR &= ~GPIO_ODR_OD0;}
@@ -119,7 +120,7 @@ void LED2_Set(int val){
 void LED3_Off(void)  		{	GPIOC->ODR &= ~GPIO_ODR_OD3;}
 void LED3_On(void)  		{	GPIOC->ODR |= GPIO_ODR_OD3;}
 void LED3_Toggle(void)  	{	GPIOC->ODR ^= GPIO_ODR_OD3;}
-int LED3_State(void)  		{	return GPIOC->ODR & GPIO_ODR_OD2;}
+int LED3_State(void)  		{	return GPIOC->ODR & GPIO_ODR_OD3;}
 void LED3_Set(int val){
 	if(val)
 		LED3_On();

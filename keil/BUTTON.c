@@ -1,4 +1,5 @@
 #include "BUTTON.h"
+#include <assert.h>
 
 void BUTTON_Init(void){    
     RCC->AHB2ENR |= RCC_AHB2ENR_GPIOCEN;  
@@ -27,6 +28,6 @@ char isPressed(int b){
         case 2: return ((GPIOC->IDR & GPIO_IDR_ID8) == 0);
         case 3: return ((GPIOC->IDR & GPIO_IDR_ID9) == 0);
     }
-    return 0;
+    assert(0);
 }
 
