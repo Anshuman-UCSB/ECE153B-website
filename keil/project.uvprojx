@@ -488,6 +488,26 @@
               <FileType>5</FileType>
               <FilePath>.\hash.h</FilePath>
             </File>
+            <File>
+              <FileName>PWM.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\PWM.c</FilePath>
+            </File>
+            <File>
+              <FileName>PWM.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\PWM.h</FilePath>
+            </File>
+            <File>
+              <FileName>Config.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Config.c</FilePath>
+            </File>
+            <File>
+              <FileName>Config.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Config.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

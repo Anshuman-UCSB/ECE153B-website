@@ -19,6 +19,21 @@ void UART2_Init(void) {
 	RCC->CCIPR |= RCC_CCIPR_USART2SEL_0;
 }
 
+void Init_USARTx(int x){
+	if (x == 1){
+		UART1_Init();
+		UART1_GPIO_Init();
+		USART_Init(USART1);
+	}
+	else if (x == 2){
+		UART2_Init();
+		UART2_GPIO_Init();
+		USART_Init(USART2);
+	}
+	else{
+		// Do nothing...
+	}
+}
 
 void UART1_GPIO_Init(void) {
 	RCC->AHB2ENR |= RCC_AHB2ENR_GPIOBEN;

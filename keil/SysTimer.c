@@ -1,6 +1,7 @@
 #include "SysTimer.h"
 
 uint32_t volatile msTicks;
+uint32_t volatile msCounter;
 
 void SysTick_Init(void) {
 	// SysTick Control & Status Register
@@ -35,6 +36,8 @@ void SysTick_Init(void) {
 
 void SysTick_Handler(void) {
 	++msTicks;
+	if(msCounter)
+		msCounter--;
 }
 
 void delay(uint32_t T) {
