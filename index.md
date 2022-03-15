@@ -21,4 +21,4 @@ pattern. The game can be enabled or disabled remotely through a Bluetooth module
 ![Block diagram](/assets/diagram.png)
 
 # Demo Video
-TBD
+<iframe width="560" height="315" src="https://www.youtube.com/embed/wqOCu2LMQms" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
