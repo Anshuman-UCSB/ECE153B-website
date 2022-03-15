@@ -8,5 +8,17 @@
 .\objects\main.o: C:\Users\Reile\AppData\Local\Arm\Packs\ARM\CMSIS\5.8.0\CMSIS\Core\Include\mpu_armv7.h
 .\objects\main.o: C:\Users\Reile\AppData\Local\Arm\Packs\Keil\STM32L4xx_DFP\2.6.1\Drivers\CMSIS\Device\ST\STM32L4xx\Include\system_stm32l4xx.h
 .\objects\main.o: LED.h
+.\objects\main.o: BUTTON.h
+.\objects\main.o: SysClock.h
+.\objects\main.o: SysTimer.h
+.\objects\main.o: RNG.h
+.\objects\main.o: SPI.h
+.\objects\main.o: UART.h
+.\objects\main.o: OLED.h
+.\objects\main.o: hash.h
+.\objects\main.o: PWM.h
+.\objects\main.o: Config.h
 .\objects\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
 .\objects\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+.\objects\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+.\objects\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\time.h
