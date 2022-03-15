@@ -5,5 +5,6 @@
 
 void PWM_Init(void);
 void Motor(uint32_t duration);
+void Flap(uint32_t duration, int dir);
 
 #endif

@@ -37,18 +37,16 @@ int main(void){
 	initializeDisplay();
 	RNG_Init();
 	PWM_Init();
-	// delay(1000);
-	// Motor(1000);
 
-	//drawImage(title);
+	drawImage(title);
 
-	// gameStartup();
-
+	gameStartup();
+	delay(1000);
 	while(1){
 		// SETUP
-		//ClearScreen();
+		ClearScreen();
 		for(i = 0;i<BUTTONS;i++) LED_Off(i);
-		// delay(ROUND_STARTUP);
+		delay(ROUND_STARTUP);
 		count = CHOOSE;
 		for(i=0;i<4;i++) simulated_buttons[i] = 0;
 		while(count){
@@ -68,7 +66,7 @@ int main(void){
 		// By here, <count> led's have been turned on
 		start = msTicks;
 		count = CHOOSE;
-		while(msTicks-start < DURATION || 1){
+		while(msTicks-start < DURATION){
 			for(i = 0;i<BUTTONS;i++){
 				if(isPressed(i) && LED_State(i)){
 					LED_Off(i);
@@ -82,7 +80,8 @@ int main(void){
 
 		// WIN STATE
 		win:
-		//drawImage(win);
+		drawImage(win);
+
 		for(i = 0;i<BUTTONS;i++) LED_Off(i);
 		delay(100);
 		for(i=0;i<4;i++){
@@ -90,12 +89,17 @@ int main(void){
 				LED_Toggle(j);
 			delay(150);
 		}
+		Flap(1000, 1);
+		delay(1000);
+		Motor(1000);
+		delay(1000);
+		Flap(1000, 0);
 		delay(1000);
 		continue;
 
 		// LOSE STATE
 		incorrect:
-		//drawImage(lose);
+		drawImage(lose);
 		for(i = 0;i<BUTTONS;i++) LED_Off(i);
 		delay(500);
 		for(i = 0;i<BUTTONS;i++)

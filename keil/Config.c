@@ -19,7 +19,7 @@ void gameStartup(void){
 	printf("Enter 'L' for low, 'M' for medium and 'H' for high\n\n");
 
 	// Choose: Number of buttons per round that are lit
-	printf("Set the number of buttuns per round that are lit up (1/2/4): ");
+	printf("Set the number of buttons per round that are lit up (1/2/4): ");
 	scanf("%c", &ans);
 	switch(ans){
 		case 'h': case 'H':
@@ -82,44 +82,43 @@ void gameStartup(void){
 	}
 	
 	// Duration: How long you have to press all the buttons
-	printf("\nSet how long you have to press all the buttons before you lose the round (1s/3s/5s): ");
+	printf("\nSet how long you have to press all the buttons before you lose the round (5s/15s/inf): ");
 	scanf("%c", &ans);
 	switch(ans){
 		case 'h': case 'H':
+			DURATION = 99999;
+			printf("\nDuration was set to inf\n");
+			break;
+		case 'm': case 'M':
+			DURATION = 15000;
+			printf("\nDuration was set to 15s\n");
+			break;
+		case 'l': case 'L':
 			DURATION = 5000;
 			printf("\nDuration was set to 5s\n");
 			break;
-		case 'm': case 'M':
-			DURATION = 3000;
-			printf("\nDuration was set to 3s\n");
-			break;
-		case 'l': case 'L':
-			DURATION = 1000;
-			printf("\nDuration was set to 1s\n");
-			break;
 		default:
-			DURATION = 3000;
-			printf("\nInvalid input using 3s\n");
-	}
+			DURATION = 99999;
+			printf("\nInvalid input using inf\n");	}
 
 	// Vibration Time: how long the motor vibrates for to dispense treats
 	printf("\nSet amount of treats (High/Medium/Low): ");
 	scanf("%c", &ans);
 	switch(ans){
 		case 'h': case 'H':
-			VIBRATION_TIME = 100;
+			VIBRATION_TIME = 3000;
 			printf("\nAmount of treats was set to High\n");
 			break;
 		case 'm': case 'M':
-			VIBRATION_TIME = 50;
+			VIBRATION_TIME = 1500;
 			printf("\nAmount of treats was set to Medium\n");
 			break;
 		case 'l': case 'L':
-			VIBRATION_TIME = 30;
+			VIBRATION_TIME = 1000;
 			printf("\nAmount of treats was set to Low\n");
 			break;
 		default:
-			DURATION = 50;
+			DURATION = 1500;
 			printf("\nInvalid input using Medium\n");
 	}
 
